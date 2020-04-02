@@ -18,5 +18,13 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "wayne-blog": {
+      "tags": []
+    },
+    "wayne-blog-e2e": {
+      "tags": [],
+      "implicitDependencies": ["wayne-blog"]
+    }
+  }
 }

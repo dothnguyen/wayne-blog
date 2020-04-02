@@ -1,7 +1,165 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "wayne-blog": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@nrwl/angular:class": {
+          "skipTests": true
+        },
+        "@nrwl/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/angular:directive": {
+          "skipTests": true
+        },
+        "@nrwl/angular:guard": {
+          "skipTests": true
+        },
+        "@nrwl/angular:module": {
+          "skipTests": true
+        },
+        "@nrwl/angular:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/wayne-blog",
+      "sourceRoot": "apps/wayne-blog/src",
+      "prefix": "wayne-repo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/wayne-blog",
+            "index": "apps/wayne-blog/src/index.html",
+            "main": "apps/wayne-blog/src/main.ts",
+            "polyfills": "apps/wayne-blog/src/polyfills.ts",
+            "tsConfig": "apps/wayne-blog/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/wayne-blog/src/favicon.ico",
+              "apps/wayne-blog/src/assets"
+            ],
+            "styles": ["apps/wayne-blog/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/wayne-blog/src/environments/environment.ts",
+                  "with": "apps/wayne-blog/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "wayne-blog:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wayne-blog:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wayne-blog:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/wayne-blog/tsconfig.app.json",
+              "apps/wayne-blog/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/wayne-blog/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/wayne-blog/jest.config.js",
+            "tsConfig": "apps/wayne-blog/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/wayne-blog/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "wayne-blog-e2e": {
+      "root": "apps/wayne-blog-e2e",
+      "sourceRoot": "apps/wayne-blog-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/wayne-blog-e2e/cypress.json",
+            "tsConfig": "apps/wayne-blog-e2e/tsconfig.e2e.json",
+            "devServerTarget": "wayne-blog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wayne-blog:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/wayne-blog-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/wayne-blog-e2e/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "wayne-blog"
 }

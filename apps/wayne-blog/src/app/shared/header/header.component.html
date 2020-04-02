@@ -1,0 +1,17 @@
+
+  <header class="navbar bg-secondary p-3">
+    <section class="navbar-section navtitle">
+      <a href="/" class="navbar-brand text-uppercase mr-2 d-block "><h2 class="mb-0">wayne do</h2></a>
+      <span class="text-primary text-large">coding is fun</span>
+    </section>
+    <section class="navbar-section navbuttons">
+      <ng-container *ngIf="auth.currentUser$ | async">
+        asdf
+      </ng-container>
+      <ng-container *ngIf="! (auth.currentUser$ | async)">
+        Login
+      </ng-container>
+    </section>
+  </header>
+
+
