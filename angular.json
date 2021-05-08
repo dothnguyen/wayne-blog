@@ -49,8 +49,16 @@
               "apps/wayne-blog/src/favicon.ico",
               "apps/wayne-blog/src/assets"
             ],
-            "styles": ["apps/wayne-blog/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "apps/wayne-blog/src/styles.scss",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/prismjs/themes/prism-okaidia.css"
+            ],
+            "scripts": [
+              "node_modules/marked/lib/marked.js",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-css.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -107,7 +115,10 @@
               "apps/wayne-blog/tsconfig.app.json",
               "apps/wayne-blog/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/wayne-blog/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/wayne-blog/**"
+            ]
           }
         },
         "test": {
@@ -142,9 +153,49 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/wayne-blog-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/wayne-blog-e2e/**"]
+            "tsConfig": [
+              "apps/wayne-blog-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/wayne-blog-e2e/**"
+            ]
           }
+        }
+      }
+    },
+    "ngx-wig-markdown": {
+      "projectType": "library",
+      "root": "libs/ngx-wig-markdown",
+      "sourceRoot": "libs/ngx-wig-markdown/src",
+      "prefix": "wayne-repo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ngx-wig-markdown/tsconfig.lib.json",
+              "libs/ngx-wig-markdown/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ngx-wig-markdown/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ngx-wig-markdown/jest.config.js",
+            "tsConfig": "libs/ngx-wig-markdown/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/ngx-wig-markdown/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }

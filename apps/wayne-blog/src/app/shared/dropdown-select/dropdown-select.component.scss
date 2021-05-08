@@ -1,0 +1,42 @@
+:host {
+  ::ng-deep {
+    .spectre-dropdown-select {
+      &.multiple {
+        vertical-align: middle;
+        max-width: 100%;
+        cursor: text;
+        background: #fff;
+        background-image: none;
+        border: 0.05rem solid #bcc3ce;
+        border-radius: 0.1rem;
+        color: #3b4351;
+        font-size: 0.8rem;
+        min-height: 1.8rem;
+        line-height: 1.2rem;
+        outline: none;
+        padding: 0.15rem 0.4rem;
+        position: relative;
+        transition: background 0.2s, border 0.2s, box-shadow 0.2s, color 0.2s;
+
+        .form-group.has-error & {
+          border-color: #e85600;
+        }
+
+        & input {
+          border: none;
+          margin-left: 0px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      &.single {
+        & .spectre-dropdown-render {
+          background-color: unset;
+        }
+      }
+    }
+  }
+}

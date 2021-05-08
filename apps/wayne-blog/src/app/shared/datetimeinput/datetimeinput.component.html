@@ -1,0 +1,22 @@
+  <input
+    type="text"
+    class="form-input"
+    spectreDateTimePicker
+    [dtpValue]="value"
+    [dtpMode]="mode"
+    [dtpFormat]="format"
+    [dtpTargetEl]="dateInput"
+    [dtpTriggerBtn]="dtpBtn"
+    [dtpShowSecond]="showSecond"
+    [disabled]="disabled"
+
+    (focus)="onTouched()"
+    (dtpDateChanged)="dateChanged($event)"
+    #dateInput
+  />
+  <button type="button" class="btn btn-primary input-group-btn" 
+    [disabled]="disabled"
+    (click)="$event.preventDefault(); $event.stopPropagation(); onTouched();"
+    #dtpBtn>
+    <i class="fa fa-calendar"></i>
+  </button>

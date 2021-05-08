@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+}
+:host > .columns {
+    flex: 1 0 0;
+}
+
+:host .home-container {
+    flex: 1 0 0;
+}

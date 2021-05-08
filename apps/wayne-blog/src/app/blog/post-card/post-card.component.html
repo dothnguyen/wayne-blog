@@ -1,0 +1,46 @@
+<div class="card" [class.no-hover]="noHover" [class.px-5]="noHover">
+  <div class="card-header">
+    <div class="columns">
+      <div class="column col-auto pt-2">
+        <div
+            class="post-avatar"
+            *ngIf="post.avatarUrl && post.avatarUrl !== ''"
+          >
+            <img
+              src="{{ post.avatarUrl }}"
+              class="img-responsive s-circle"
+              alt="{{ post.userName }}"
+            />
+          </div>
+          <div
+            class="s-circle bg-primary post-avatar"
+            *ngIf="!post.avatarUrl || post.avatarUrl === ''"
+          ></div>
+      </div>
+      <div class="column">
+        <div class="post-author">
+            <span class="author">{{ post.userName }}</span>
+            <span class="publish-date text-gray">{{
+              post.publishDate | momentDate: 'dd/MM/yy HH:mm'
+            }}</span>
+          </div>
+      </div>
+    </div>
+    <div class="card-title post-title">
+      <a [routerLink]="['/post', post.id]">{{ post.title }}</a> 
+    </div>
+    <div *ngIf="post.tags && post.tags.length">
+            <span
+              class="label label-gray label-rounded ml-1"
+              *ngFor="let tag of post.tags"
+              >{{ tag }}</span
+            >
+          </div>
+  </div>
+  <div class="card-body">
+    <div class="post-preview mt-5" markdown [data]="post.content"></div>
+  </div>
+  <div class="card-footer text-right">
+    <a class="btn btn-link btn-readmore" [routerLink]="['/post', post.id]">Read More...</a>
+  </div>
+</div>

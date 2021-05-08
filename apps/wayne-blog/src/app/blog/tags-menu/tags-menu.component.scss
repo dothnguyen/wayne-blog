@@ -1,0 +1,25 @@
+:host {
+  height: 100%;
+
+  & ul.menu {
+    background-color: #001f3f;
+    height: 100%;
+    transform: none;
+
+    .divider[data-content]::after {
+      background-color: transparent;
+    }
+
+    .divider {
+        border-top: none;
+    }
+
+    & .menu-item {
+        color: rgba(#FFF, 0.35);
+    }
+
+    & .menu-item:hover {
+      color: rgba(#FFF, 0.75);
+    }
+  }
+}

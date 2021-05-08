@@ -1,0 +1,42 @@
+:host {
+  .timer {
+    width: 100%;
+    min-width: 280px;
+    border: 0.05rem solid #dadee4;
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    input[type='number'] {
+      width: 44px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    .timer-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-divider {
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+
+    .timer-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

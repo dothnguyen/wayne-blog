@@ -1,0 +1,35 @@
+footer {
+  height: 150px;
+  background-color: #001f3f;
+  display: flex;
+  padding: 0.3rem;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+
+  & .email {
+      padding: 0.3rem 0.5rem;
+      height: auto;
+      //align-self: start;
+  }
+
+  & .social {
+    padding: 0.3rem 0.5rem;
+    
+    & a {
+      margin-right: 1rem;
+      color: white;
+
+      &:hover {
+        color: #b4d5f6;
+      }
+    }
+  }
+}
+
+.main-panel {
+  background-color: #f6f8f9;
+  min-height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+}

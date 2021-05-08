@@ -1,0 +1,24 @@
+<div class="container grid-xl">
+  <app-header (signout)="signout()"></app-header>
+  <progress class="progress" max="100" *ngIf="loading"></progress>
+  <div class="main-panel">
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+    <span class="email"
+      ><i class="fa fa-envelope"></i> dothnguyen@gmail.com</span
+    >
+    <span class="email"><i class="fa fa-phone"></i> 04-5262-9779</span>
+    <div class="social">
+      <a href="https://www.facebook.com/nguyen.do" target="_blank"
+        ><i class="fa fa-2x fa-facebook-official"></i
+      ></a>
+      <a href="https://github.com/dothnguyen" target="_blank"
+        ><i class="fa fa-2x fa-github"></i
+      ></a>
+      <a href="https://www.linkedin.com/in/dothnguyen/" target="_blank"
+        ><i class="fa fa-2x fa-linkedin"></i
+      ></a>
+    </div>
+  </footer>
+</div>

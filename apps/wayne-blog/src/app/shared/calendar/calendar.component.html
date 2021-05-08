@@ -1,0 +1,39 @@
+<div class="calendar datepicker" [ngClass]="{'inline calendar-lg': isInline}">
+  <div class="calendar-nav navbar">
+    <button class="btn btn-action btn-link btn-lg" (click)='clickPrevMonth()'>
+      <i class="icon icon-arrow-left"></i>
+    </button>
+    <div class="navbar-primary">{{monthYear$ | async}}</div>
+    <button class="btn btn-action btn-link btn-lg" (click)='clickNextMonth()'>
+      <i class="icon icon-arrow-right"></i>
+    </button>
+  </div>
+  <div class="calendar-container" *ngLet="dates$ | async as dates">
+    <div class="calendar-header">
+      <div class="calendar-date">Sun</div>
+      <div class="calendar-date">Mon</div>
+      <div class="calendar-date">Tue</div>
+      <div class="calendar-date">Wed</div>
+      <div class="calendar-date">Thu</div>
+      <div class="calendar-date">Fri</div>
+      <div class="calendar-date">Sat</div>
+    </div>
+    <div class="calendar-body">
+      <ng-container *ngFor="let row of dates">
+        <ng-container *ngFor="let item of row">
+          <div class="calendar-date" 
+            [class.prev-month]="item.month() == getPreviousMonth()"
+            [class.next-month]="item.month() == getNextMonth()"
+            [class.tooltip]="isToday(item)"
+            [attr.data-tooltip]="isToday(item) ? 'Today' : null">
+            
+            <button class="date-item" 
+              [class.date-today]="isToday(item)"
+              [class.active]="isSelected(item)"
+              (click)="clickOnDate(item)">{{item.date()}}</button>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

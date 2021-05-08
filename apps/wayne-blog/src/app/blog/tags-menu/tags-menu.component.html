@@ -1,0 +1,15 @@
+<ul class="menu">
+  <!-- menu header text -->
+  <li class="divider" data-content="TOPICS"></li>
+
+  <ng-container *ngFor="let item of tagCounts">
+    <li class="menu-item">
+      <a class="btn btn-link text-left" [class.active]="homeSharedService.tags$.value === item.tag" (click)="onTagClick(item)" >
+        {{ item.tag }}
+      </a>
+      <div class="menu-badge">
+        <label class="label label-primary">{{ item.count }}</label>
+      </div>
+    </li>
+  </ng-container>
+</ul>

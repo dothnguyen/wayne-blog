@@ -1,0 +1,31 @@
+:host {
+  &.tagsinput {
+    vertical-align: middle;
+    max-width: 100%;
+    cursor: text;
+    background: #fff;
+    background-image: none;
+    border: 0.05rem solid #bcc3ce;
+    border-radius: 0.1rem;
+    color: #3b4351;
+    font-size: 0.8rem;
+    min-height: 2rem;
+    line-height: 1.2rem;
+    outline: none;
+    padding: 0.25rem 0.4rem;
+    position: relative;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s, color 0.2s;
+
+    & span {
+        margin-right: 3px;
+    }
+
+    & input {
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

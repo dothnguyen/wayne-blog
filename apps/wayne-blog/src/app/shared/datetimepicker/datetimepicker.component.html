@@ -1,0 +1,13 @@
+<div class="spetre-datetimepicker" #dtpContainer>
+  <spectre-calendar
+    [value]="value"
+    *ngIf="mode === 'date' || mode === 'datetime'"
+
+    (dateClicked)="onDateChanged($event)"
+  ></spectre-calendar>
+
+  <spectre-timer [value]="value" 
+    [showSecond]="showSecond"
+    *ngIf="mode === 'time' || mode === 'datetime'"
+    (timeChanged)="onTimeChanged($event)"></spectre-timer>
+</div>

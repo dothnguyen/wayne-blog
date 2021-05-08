@@ -1,0 +1,48 @@
+@import '../../../../../../node_modules/spectre.css/src/variables';
+@import '../../../../../../node_modules/spectre.css/src/mixins';
+@import '../../../../../../node_modules/spectre.css/src/menus';
+
+:host {
+  width: 100%;
+
+  & .spectre-filterable-list {
+    padding: $unit-1;
+    margin: 1px;
+
+    & .filterable-input {
+      width: calc(100% - 0.5rem);
+      margin: 0 auto;
+    }
+
+    & .filterable-dropdown {
+      @extend .menu;
+      box-shadow: unset;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: $unit-1;
+      
+      & .filterable-dropdown-item {
+        @extend .menu-item;
+        display: block;
+        padding: $unit-2 $unit-1;
+
+        //   &:focus,
+        //   &:hover {
+        //     background: $secondary-color;
+        //     color: $primary-color;
+        //   }
+        &:active,
+        &.active {
+          background: $secondary-color;
+          color: $primary-color;
+        }
+      }
+    }
+
+    &.popover {
+      box-shadow: 0 0.05rem 0.2rem rgba(48, 55, 66, 0.3);
+      background-color: white;
+      display: block;
+    }
+  }
+}

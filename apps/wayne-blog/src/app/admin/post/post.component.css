@@ -1,0 +1,8 @@
+:host .publish-date-container {
+        width: 90%;
+    }
+
+.post-preview {
+    min-height: 100px;
+    padding: 10px;
+}

@@ -1,0 +1,9 @@
+<div #tagInputContainer (click)="onTouched(); containerClicked()">
+<span class="chip" *ngFor="let item of value" (click)="onTouched(); $event.stopPropagation();">
+  {{item}}
+  <a class="btn btn-clear" role="button" (click)="onTouched(); removeItem(item)" 
+    *ngIf="!disabled"></a>
+</span>
+<input type="text" size="6" #inputText (keyup)="textKeyup($event)" (keydown)="textKeydown($event)" (focus)="onTouched()" [disabled]="disabled">
+</div>
+

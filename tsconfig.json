@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@wayne-repo/ngx-wig-markdown": ["libs/ngx-wig-markdown/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

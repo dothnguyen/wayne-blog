@@ -1,0 +1,38 @@
+<div class="spectre-filterable-list" (click)="focusInput()" #container>
+  <input
+    type="text"
+    class="form-input filterable-input"
+    [formControl]="searchInput"
+    (keydown.arrowup)="$event.preventDefault(); onArrowUp()"
+    (keydown.arrowdown)="$event.preventDefault(); onArrowDown()"
+    (keydown.enter)="onPressEnter()"
+    (keydown.escape)="onPressEsc()"
+    (blur)="onBlur()"
+    #input
+    *ngIf="showSearch"
+  />
+  <ul
+    class="filterable-dropdown"
+    #ulElement
+    (keydown.arrowup)="$event.preventDefault()"
+    (keydown.arrowdown)="$event.preventDefault()"
+  >
+    <ng-container *ngIf="searchResult$ | async; let items">
+      <ng-container *ngIf="items?.length">
+        <li
+          class="filterable-dropdown-item"
+          #liElements
+          *ngFor="let item of items; let i = index"
+          [class.active]="i === curIndex"
+          (mouseenter)="mouseEnter($event, i)"
+          (click)="itemClick(item)"
+        >
+          {{ item.toString() }}
+        </li>
+      </ng-container>
+      <ng-container *ngIf="!items || items.length === 0">
+        <li class="filterable-dropdown-no-data">No data.</li>
+      </ng-container>
+    </ng-container>
+  </ul>
+</div>

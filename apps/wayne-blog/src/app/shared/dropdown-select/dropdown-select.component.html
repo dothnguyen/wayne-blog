@@ -1,0 +1,46 @@
+<div class="spectre-dropdown-select" [class.multiple]="mode==='multiple'" [class.single]="mode==='single'"
+ #selectContainer
+ (click)="onTouched(); multipleContainerClick()">
+  <ng-container *ngIf="mode === 'multiple'">
+    <span
+      class="chip"
+      *ngFor="let item of value"
+      (click)=" onTouched(); $event.stopPropagation()"
+    >
+      {{ item }}
+      <a
+        class="btn btn-clear"
+        role="button"
+        *ngIf="!disabled"
+        (click)="onTouched(); $event.stopPropagation();removeItem(item)"
+      ></a>
+    </span>
+    <input
+      type="text"
+      size="6"
+      #inputText
+      *ngIf="!disabled"
+      [formControl]="searchInput"
+      (focus)="onTouched(); onMultipleInputFocus()"
+      (blur)="onMultipleInputBlur()"
+
+      (keydown.arrowup)="$event.preventDefault();onMultipleArrowUp()" 
+      (keydown.arrowdown)="$event.preventDefault();onMultipleArrowDown()"
+      (keydown.enter)="onMultiplePressEnter()"
+      (keydown.escape)="onPressEsc()"
+      (keydown.backspace)="onPressBackspace()"
+    />
+  </ng-container>
+  <ng-container *ngIf="mode === 'single'">
+    <input
+      readonly
+      [value]="value ? value.toString() : ''"
+      class="form-input spectre-dropdown-render"
+      role="textbox"
+      aria-readonly="true"
+      (focus)="onTouched(); singleInputFocus()"
+      (click)="onTouched(); singleInputClick()"
+      (mousedown)="clicked = true;"
+    />
+  </ng-container>
+</div>

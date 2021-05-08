@@ -1,0 +1,18 @@
+:host {
+  .spetre-datetimepicker {
+    width: 280px;
+
+    ::ng-deep .calendar {
+      border-radius: unset;
+    }
+
+    ::ng-deep .timer {
+      border-top: none;
+    }
+
+    &.popover {
+      box-shadow: 0 0.05rem 0.2rem rgba(48, 55, 66, 0.3);
+      background-color: white;
+    }
+  }
+}

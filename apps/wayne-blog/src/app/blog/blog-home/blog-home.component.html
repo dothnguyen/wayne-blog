@@ -1,0 +1,159 @@
+<div class="columns col-gapless">
+  <div class="column col-9 col-md-12 home-container">
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
+  <div class="column col-3 hide-md">
+    <wayne-repo-tags-menu
+      (tagClick)="onTagClick($event)"
+      [tagCounts]="tagCounts$ | async"
+    ></wayne-repo-tags-menu>
+  </div>
+</div>
+
+<!-- <div>
+  <br /><br />
+  <div>
+    <form [formGroup]="fb">
+      <div class="form-group d-flex">
+        <label
+          style="border: 0.05rem solid #bcc3ce"
+          class="flex-width-40"
+          #labelOutput
+        ></label>
+        <button
+          type="button"
+          class="btn btn-primary input-group-btn"
+          spectreDateTimePicker
+          [dtpValue]="testDate2"
+          [dtpMode]="'datetime'"
+          [dtpTriggerBtn]="dtpBtn1"
+          [dtpShowSecond]="true"
+          #dtpBtn1
+        >
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-input"
+            #dateInput
+            spectreDateTimePicker
+            [dtpValue]="testDate2"
+            [dtpMode]="'datetime'"
+            [dtpTargetEl]="dateInput"
+            [dtpTriggerBtn]="dtpBtn"
+            [dtpShowSecond]="true"
+            formControlName="testDate1"
+          />
+          <button type="button" class="btn btn-primary input-group-btn" #dtpBtn>
+            <i class="fa fa-calendar"></i>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <spectre-datetimeinput
+          [mode]="'datetime'"
+          [format]="'MM-DD-YYYY HH:mm:ss'"
+          [showSecond]="true"
+          formControlName="testDate2"
+        ></spectre-datetimeinput>
+      </div>
+
+      <div class="form-group d-flex  mt-5">
+        <label class="form-label flex-width-10 mr-5" for="txtSearch">Tag</label>
+        <spectre-taginput class="flex-width-40"></spectre-taginput>
+      </div>
+
+       <div class="form-group d-flex mt-5">
+        <label class="form-label flex-width-10 mr-5" for="txtSearch">Dropdown list</label>
+        <spectre-dropdown-list class="flex-width-40"
+          [data]="data"></spectre-dropdown-list>
+      </div> 
+
+      
+      <div class="form-group d-flex mt-10">
+        <label class="form-label flex-width-10 mr-5" for="txtSearch">Select Single</label>
+        <spectre-dropdown-select class="flex-width-40"
+          [mode]="'single'"
+          [data]="data"></spectre-dropdown-select>
+      </div>  --
+
+      <div
+        class="form-group d-flex mt-5"
+        [class.has-error]="fb.get('select').touched && !fb.get('select').valid"
+      >
+        <label class="form-label flex-width-10 mr-5" for="txtSearch"
+          >Select Multi</label
+        >
+        <spectre-dropdown-select
+          class="flex-width-40"
+          [data]="allTags$ | async"
+          [mode]="mode"
+          formControlName="select"
+        ></spectre-dropdown-select>
+      </div>
+      <div class="form-group d-flex mt-5">
+        <button type="button" (click)="changeMode()">Changg Mode</button>
+      </div>
+    </form>
+  </div>
+  <br /><br />
+  <div></div>
+
+  <div>
+  <custom-dropdown [reference]="refElement" #dropdown>
+    <spectre-calendar
+      [value]="testDate"
+      (dateClicked)="onDateSelected($event)"
+    ></spectre-calendar>
+  </custom-dropdown>
+</div> 
+
+   <div>
+  <p>This is other content that will be overlay by dropdown</p>
+</div>
+<form [formGroup]="fb">
+  <div class="form-horizontal">
+    <div
+      class="form-group "
+      [class.has-error]="
+        this.fb.get('testDate1').touched && !this.fb.get('testDate1').valid
+      "
+    >
+      <label class="form-label flex-width-5 mr-5" for="txtSearch">Date 1</label>
+      <spectre-datepicker
+        class="flex-width-15"
+        [disabled]="false"
+        [mode]="'datetime'"
+        formControlName="testDate1"
+      ></spectre-datepicker>
+    </div>
+  </div>
+
+  <div class="form-horizontal">
+    <div class="form-group ">
+      <label class="form-label flex-width-5 mr-5" for="txtSearch">Date 2</label>
+      <spectre-datepicker
+        class="flex-width-15"
+        [disabled]="false"
+        [mode]="'datetime'"
+        formControlName="testDate2"
+      ></spectre-datepicker>
+    </div>
+  </div>
+</form>
+
+<div>
+  <spectre-timer [value]="testDate" [showSecond]="true"></spectre-timer>
+</div>
+
+<div>
+  <spectre-datetimepicker
+    [value]="testDate"
+    [showSecond]="true"
+    [mode]="'datetime'"
+  ></spectre-datetimepicker>
+</div> 
+</div>-->

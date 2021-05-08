@@ -1,0 +1,89 @@
+<button class="btn btn-primary" routerLink="/admin/posts/new">New Post</button>
+<div class="mt-5">
+    <div class="form-group d-flex">
+      <label class="form-label flex-width-10 mr-5" for="txtSearch">Search</label>
+      <input type="text" id="txtSearch" class="form-input flex-width-40"
+        [formControl]="searchInput">
+    </div>
+
+    <!-- <div class="form-group d-flex">
+      <label class="form-label flex-width-10 mr-5" for="txtSearch">Tag</label>
+      <spectre-taginput class="flex-width-40"
+        [formControl]="tagInput"></spectre-taginput>
+    </div> -->
+
+    <div class="form-group d-flex">
+      <label class="form-label flex-width-10 mr-5" for="txtSearch">Tags</label>
+      <spectre-dropdown-select class="flex-width-40"
+        [mode]="'multiple'"
+        [data]="allTags$ | async"
+        [formControl]="tagInput"></spectre-dropdown-select>
+    </div>
+
+  <div class="post-table-container">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+            Title 
+            <i class="fa fa-arrow-down" *ngIf="sort.title" 
+                [class.fa-arrow-down]="sort.title === sortDir.DESC" 
+                [class.fa-arrow-up]="sort.title === sortDir.ASC" (click)="clickSort('title')"></i>
+            <i class="fa fa-sort" *ngIf="!sort.title" (click)="clickSort('title')"></i>
+          </th>
+          <th>Tags</th>
+          <th>Published</th>
+          <th>
+            Published Date
+            <i class="fa fa-arrow-down" *ngIf="sort.publishDate" 
+                [class.fa-arrow-down]="sort.publishDate === sortDir.DESC" 
+                [class.fa-arrow-up]="sort.publishDate === sortDir.ASC" (click)="clickSort('publishDate')"></i>
+            <i class="fa fa-sort" *ngIf="!sort.publishDate" (click)="clickSort('publishDate')"></i>
+          </th>
+          <th>Last Updated
+            <i class="fa fa-arrow-down" *ngIf="sort.lastUpdatedDate" 
+                [class.fa-arrow-down]="sort.lastUpdatedDate === sortDir.DESC" 
+                [class.fa-arrow-up]="sort.lastUpdatedDate === sortDir.ASC" (click)="clickSort('lastUpdatedDate')"></i>
+            <i class="fa fa-sort" *ngIf="!sort.lastUpdatedDate" (click)="clickSort('lastUpdatedDate')"></i>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts$ | async">
+          <td>
+            <h4>{{post.title}}</h4>
+            <div *ngIf="post.tags && post.tags.length">
+              <span class="label label-secondary label-rounded ml-1" *ngFor="let tag of post.tags">{{ tag }}</span>
+            </div>
+          </td>
+          <td></td>
+          <td><i class="fa fa-check" *ngIf="post.isPublish"></i></td>
+          <td>{{ post.publishDate | momentDate:'dd/MM/yyyy HH:mm:ss'}}</td>
+          <td>{{ post.lastUpdatedDate | momentDate:'dd/MM/yyyy HH:mm:ss'}}</td>
+          <td>
+            <button class="btn btn-link" [routerLink]="['/admin/posts/', post.id]"><i class="fa fa-pencil"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="pagination float-left">
+      <li><b>Total: {{count$.value}} post(s)</b></li>
+    </ul>
+    <ul class="pagination float-right" *ngLet="(pages$ | async) as pages">
+      <li class="page-item" [class.disabled]="pageIdx$.getValue() === 1">
+        <a (click)="changePage(pageIdx$.getValue() - 1)">Previous</a>
+      </li>
+
+      <li class="page-item" [class.active]="page === pageIdx$.getValue()" *ngFor="let page of pages">
+        <a *ngIf="page >= 1" (click)="changePage(page)">{{page}}</a>
+        <span *ngIf="page === -1">...</span>
+      </li>
+      
+      <li class="page-item" [class.disabled]="pageIdx$.getValue() === (noOfPage$|async)">
+        <a (click)="changePage(pageIdx$.getValue() + 1)">Next</a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+</div>

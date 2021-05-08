@@ -1,0 +1,80 @@
+<div class="spetre-datepicker">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-input"
+      #dateInput
+      [disabled]="disabled"
+      [(value)]="formattedValue"
+      (focus)="onTouched()"
+      (change)="onTextChanged($event)"
+    />
+    <button
+      role="button"
+      class="btn btn-primary input-group-btn"
+      (click)="$event.preventDefault(); $event.stopPropagation(); onTouched(); toggleDropdown()"
+      [disabled]="disabled"
+    >
+      <i class="fa fa-calendar"></i>
+    </button>
+  </div>
+  <custom-dropdown [reference]="dateInput" #dropdown>
+    <div (click)="onTouched()">
+      <spectre-calendar
+        [value]="value"
+        (dateClicked)="onDateSelected($event)"
+        *ngIf="mode === 'date' || mode === 'datetime'"
+      ></spectre-calendar>
+
+      <div
+        class="spetre-timepicker"
+        *ngIf="mode === 'time' || mode === 'datetime'"
+      >
+        <div class="columns">
+          <div class="column col-6 col-mx-auto">
+            <div class="spectre-timepicker-row">
+              <div class="spectre-timepicker-col">
+                <button class="btn btn-action btn-link" (click)="addHours(1)">
+                  <i class="icon icon-arrow-up"></i>
+                </button>
+                <input
+                  type="number"
+                  class="form-input"
+                  size="1"
+                  [(ngModel)]="hour"
+                  #ctrl="ngModel"
+                  (change)="changeTime()"
+                />
+                <button class="btn btn-action btn-link" (click)="addHours(-1)">
+                  <i class="icon icon-arrow-down"></i>
+                </button>
+              </div>
+              <div class="spectre-timepicker-col spectre-timepicker-divider">
+                :
+              </div>
+              <div class="spectre-timepicker-col">
+                <button class="btn btn-action btn-link" (click)="addMinutes(5)">
+                  <i class="icon icon-arrow-up"></i>
+                </button>
+                <input
+                  type="number"
+                  class="form-input"
+                  size="1"
+                  [(ngModel)]="minute"
+                  #ctrl1="ngModel"
+                  (change)="changeTime()"
+                />
+                <button
+                  class="btn btn-action btn-link"
+                  (click)="addMinutes(-5)"
+                >
+                  <i class="icon icon-arrow-down"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </custom-dropdown>
+</div>

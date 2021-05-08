@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { BehaviorSubject, Subject, of, timer } from 'rxjs';
-import { takeUntil, map, tap, first, take, withLatestFrom, catchError, switchMap, filter } from 'rxjs/operators';
+import { takeUntil, map, tap, first, take, withLatestFrom, catchError, switchMap, filter, shareReplay, flatMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'wayne-repo-login',
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class LoginComponent implements OnInit {
+
+  loading = false;
+
   // login form
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -23,36 +27,41 @@ export class LoginComponent implements OnInit {
 
   loginErr$ = new BehaviorSubject(false);
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.auth.currentUser$.pipe(
-      filter(u => u),
-      takeUntil(this.destroy$)
-    ).subscribe(
-      u => {
-        console.log(u);
-        this.router.navigate(['/admin'])
-      }
-    )
+  constructor(private auth: AuthService, private userService: UserService, private router: Router) {
+    this.auth.curUserProfile$
+      .pipe(
+        takeUntil(this.destroy$),
+      )
+      .subscribe(
+        userProfile => {
+          console.log(userProfile);
+          if (userProfile) {
+            this.router.navigate(['/admin']);
+          } else {
+            // don't have a profile yet => update one
+            this.router.navigate(['/profile']);
+          }
+        },
+        err => {
+          this.loading = false;
+          this.loginErr$.next(true);
+          setTimeout(() => this.loginErr$.next(false), 2000);
+        }
+      );
   }
 
   ngOnInit(): void {
-    this.submit$.pipe(
-      withLatestFrom(this.loginForm.valueChanges, (_, values) => values),
-      switchMap(values => this.auth.login(values)),
-    ).subscribe(
-      value => {
-        console.log(value)
-      },
-      err => {
-        console.error(err);
-        this.loginErr$.next(true);
-        setTimeout(()=>this.loginErr$.next(false), 2000);
-      }
-    )
+
   }
 
   ngDestroy() {
     this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  login() {
+    this.loading = true;
+    this.auth.login(this.loginForm.value);
   }
  
 }

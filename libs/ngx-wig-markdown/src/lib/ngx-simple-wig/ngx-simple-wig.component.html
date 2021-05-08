@@ -1,0 +1,61 @@
+<div class="ng-wig">
+  <ul class="nw-toolbar">
+    <li *ngFor="let button of toolbarButtons"
+        class="nw-toolbar__item">
+      <div *ngIf="!button.type">
+        <button type="button"
+                class="nw-button"
+                (click)="toolbarItemClick(button)"
+                [ngClass]="[button.styleClass]"
+                [title]="button.title"
+                [disabled]="disabled"
+                tabindex="-1">
+          <ng-container *ngIf="!button.icon">{{ button.label }}</ng-container>
+          <div *ngIf="button.icon"
+               class="icon"
+               [ngClass]="[button.icon]">
+          </div>
+        </button>
+      </div>
+      <div *ngIf="button.type == 'dropdown'">
+        <select (change)="changeToolbarDropdown(button.dropdownItems, $event.target.value)">
+          <option selected>{{button.label}}</option>
+          <option *ngFor="let item of button.dropdownItems" [value]="item.label" >{{item.label}}</option>
+        </select>
+      </div>
+    </li>
+  </ul>
+
+  <div class="nw-editor-container"
+       [ngClass]="{ 'nw-editor-container--with-toolbar': toolbarButtons.length }">
+    <div
+         class="nw-editor__src-container"
+         [ngClass]="{ 'nw-disabled': disabled,'nw-invisible': (editMode != 'HTML') }">
+      <textarea 
+                [ngModel]="htmlContent"
+                (ngModelChange)="onTextareaChangeHtml($event)"
+                (blur)="propagateTouched()"
+                class="nw-editor__src"></textarea>
+    </div>
+    <div
+        class="nw-editor__src-container"
+        [ngClass]="{ 'nw-disabled': disabled,'nw-invisible': (editMode != 'MARK') }">
+    <textarea 
+              [ngModel]="markdownContent"
+              (ngModelChange)="onTextareaChangeMarkdown($event)"
+              (blur)="propagateTouched()"
+              class="nw-editor__src"></textarea>
+    </div>
+    <div class="nw-editor"
+         [ngClass]="{ 'nw-disabled': disabled,'nw-invisible': (editMode != 'WIG') }">
+      
+      <div #ngWigEditable
+           class="nw-editor__res"
+           [attr.contenteditable]="!disabled"
+           (focus)="hasFocus = true"
+           (blur)="onBlur()"
+           (input)="onContentChange(ngWigEditable.innerHTML)">
+      </div>
+    </div>
+  </div>
+</div>

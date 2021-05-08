@@ -1,0 +1,79 @@
+<div class="timer">
+  <div class="columns">
+    <div class="column">
+      <div class="timer-row">
+        <div class="timer-col">
+          <button
+            class="btn btn-action btn-link"
+            (click)="changeTime('hour', true)"
+          >
+            <i class="icon icon-arrow-up"></i>
+          </button>
+          <input
+            type="number"
+            class="form-input"
+            size="1"
+            [formControl]="hourInput"
+            (change)="hourChange($event)"
+          />
+          <button
+            class="btn btn-action btn-link"
+            (click)="changeTime('hour', false)"
+          >
+            <i class="icon icon-arrow-down"></i>
+          </button>
+        </div>
+        <div class="timer-col timer-divider">
+          :
+        </div>
+        <div class="timer-col">
+          <button
+            class="btn btn-action btn-link"
+            (click)="changeTime('minute', true)"
+          >
+            <i class="icon icon-arrow-up"></i>
+          </button>
+          <input
+            type="number"
+            class="form-input"
+            size="1"
+            [formControl]="minuteInput"
+            (change)="minuteChange($event)"
+          />
+          <button
+            class="btn btn-action btn-link"
+            (click)="changeTime('minute', false)"
+          >
+            <i class="icon icon-arrow-down"></i>
+          </button>
+        </div>
+        <ng-container *ngIf="showSecond">
+          <div class="timer-col timer-divider">
+            :
+          </div>
+          <div class="timer-col">
+            <button
+              class="btn btn-action btn-link"
+              (click)="changeTime('second', true)"
+            >
+              <i class="icon icon-arrow-up"></i>
+            </button>
+            <input
+              type="number"
+              class="form-input"
+              size="1"
+              [formControl]="secondInput"
+              (change)="secondChange($event)"
+            />
+            <button
+              class="btn btn-action btn-link"
+              (click)="changeTime('second', false)"
+            >
+              <i class="icon icon-arrow-down"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

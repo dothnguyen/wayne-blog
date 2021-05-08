@@ -1,0 +1,46 @@
+<div class="columns col-gapless">
+  <div class="column col-6 col-md-8 col-sm-12 col-mx-auto">
+      <form [formGroup]="profileForm" (submit)="saveProfile()">
+        <div class="panel mt-5">
+          <div class="panel-header">
+            <div class="panel-title text-primary"><h2>Update your profile</h2></div>
+          </div>
+          <div class="panel-body">
+              <div class="form-group"
+                [class.has-error]="profileForm.get('username').touched && !profileForm.get('username').valid">
+      
+                <label class="form-label" for="username">User Name</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    id="username"
+                    placeholder="User Name"
+                    formControlName="username"/>
+        
+                <p *ngIf="profileForm.get('username').touched && !profileForm.get('username').valid"
+                    class="form-input-hint">
+                    Please enter a your name.
+                </p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="avatarUrl">Avatar Url</label>
+                <input type="url" id="avatarUrl" class="form-input" formControlName="avatarUrl" placeholder="Avatar Url"/>
+                <p *ngIf="profileForm.get('avatarUrl').touched && !profileForm.get('avatarUrl').valid"
+                    class="form-input-hint">
+                    Please enter a valid url.
+                </p>
+              </div>
+              <div *ngIf="profileForm.get('avatarUrl').valid">
+                  <img class="s-circle" [src]="profileForm.get('avatarUrl').value" alt="" width="100" height="100">
+              </div>
+          </div>
+          <div class="panel-footer">
+            <button type="submit" [disabled]="!profileForm.valid || loading" [class.loading]="loading" class="btn btn-primary btn-block">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+
