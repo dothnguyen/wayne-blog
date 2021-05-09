@@ -38,3 +38,5 @@ testem.log
 .DS_Store
 Thumbs.db
 apps/wayne-blog/src/environments/environment.ts
+
+bin/*
