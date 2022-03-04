@@ -1,31 +1,57 @@
-
-  <header class="navbar bg-light p-3 pl-5 pr-5">
-    <section class="navbar-section navtitle">
-      <a routerLink="/" class="navbar-brand text-uppercase mr-2 d-block "><h1 class="mb-0">wayne do</h1></a>
-      <span class="text-large">coding is fun</span>
-    </section>
-    <section class="navbar-section navbuttons">
-      <ul class="nav nav-horizontal">
-        <li class="nav-item active"><a class="btn btn-link" routerLink="/">Home</a></li>
-        <li class="nav-item"><a href="https://waynedo.azurewebsites.net/" target="_blank" class="btn btn-link">Resume</a></li>
-        <li class="nav-item"><a href="https://github.com/dothnguyen" target="_blank" class="btn btn-link">Github</a></li>
-        <li class="nav-item" *ngIf="auth.isLoggedIn$ | async">
-          <div class="dropdown" *ngLet="(auth.curUserProfile$ | async) as profile"><a class="btn btn-link dropdown-toggle" tabindex="0" >
-          <span >{{ profile? profile.userName : "Welcome" }}</span> <i class="icon icon-caret"></i></a>
+<header class="navbar bg-light p-3 pl-5 pr-5">
+  <section class="navbar-section navtitle">
+    <a routerLink="/" class="navbar-brand text-uppercase mr-2 d-block "
+      ><h1 class="mb-0">wayne do</h1></a
+    >
+    <span class="text-large">coding is fun</span>
+  </section>
+  <section class="navbar-section navbuttons">
+    <ul class="nav nav-horizontal">
+      <li class="nav-item active">
+        <a class="btn btn-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="https://wayne-resume.web.app/"
+          target="_blank"
+          class="btn btn-link"
+          >Resume</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="https://github.com/dothnguyen"
+          target="_blank"
+          class="btn btn-link"
+          >Github</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="auth.isLoggedIn$ | async">
+        <div class="dropdown" *ngLet="auth.curUserProfile$ | async as profile">
+          <a class="btn btn-link dropdown-toggle" tabindex="0">
+            <span>{{ profile ? profile.userName : 'Welcome' }}</span>
+            <i class="icon icon-caret"></i
+          ></a>
           <ul class="menu">
-            <li class="menu-item" *ngIf="profile"><a [routerLink]="['/admin']">Admin</a></li>
-            <li class="menu-item"><a [routerLink]="['/profile']">{{ profile? "Profile" : "Setup Profile" }}</a></li>
+            <li class="menu-item" *ngIf="profile">
+              <a [routerLink]="['/admin']">Admin</a>
+            </li>
+            <li class="menu-item">
+              <a [routerLink]="['/profile']">{{
+                profile ? 'Profile' : 'Setup Profile'
+              }}</a>
+            </li>
             <li class="divider"></li>
-            <li class="menu-item"><a href="javascript:void(0);" (click)='logout()'>Logout</a></li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" (click)="logout()">Logout</a>
+            </li>
           </ul>
         </div>
-        </li>
-      </ul>
-      
-      <!-- <ng-container *ngIf="! (auth.isLoggedIn$ | async)">
+      </li>
+    </ul>
+
+    <!-- <ng-container *ngIf="! (auth.isLoggedIn$ | async)">
         <a routerLink="/login">Login</a>
       </ng-container> -->
-    </section>
-  </header>
-
-
+  </section>
+</header>
